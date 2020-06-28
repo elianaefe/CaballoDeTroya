@@ -22,8 +22,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //********************************************************************************************************
+//busqueda desde welcome
+Route::get('/search', 'SearchController@show');
+Route::get('/products/json', 'SearchController@data');
+
 //vista de un producto
 Route::get('/products/{id}', 'ProductController@show');
+
+//vista categoria
+Route::get('/categories/{category}', 'CategoryController@show');
 
 //********************************************************************************************************
 //vista carrito de compras
@@ -51,5 +58,15 @@ Route::middleware(['auth','admin'])->prefix('admin')->namespace('Admin')->group(
 	Route::delete('/products/{id}/images', 'ImageController@destroy');
 	
 	Route::get('/products/{id}/images/select/{image}', 'ImageController@select'); //listado de imagenes
+
+	//categorias
+	Route::get('/categories', 'CategoryController@index'); //listado de productos
+	Route::get('/categories/create', 'CategoryController@create'); //crear producto
+	Route::post('/categories', 'CategoryController@store');
+
+	Route::get('/categories/{category}/edit', 'CategoryController@edit'); //edicion
+	Route::post('/categories/{category}/edit', 'CategoryController@update'); //actualizar
+	Route::delete('/categories/{id}', 'CategoryController@destroy'); //form de eliminacion
+
 
 });

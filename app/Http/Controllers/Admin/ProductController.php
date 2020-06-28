@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.products.create');   //formulario
+        $categories = Category::orderBy('name')->get();
+        return view('admin.products.create')->with(compact('categories'));   //formulario
     }
 
     public function store(Request $request)
@@ -48,6 +50,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = $request->category_id; 
         $product->save(); //se encarga de hacer un INSERT en la tabla
 
         return redirect('admin/products');
@@ -55,8 +58,9 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $categories = Category::orderBy('name')->get();
         $product = Product::find($id);
-        return view('admin.products.edit')->with(compact('product'));   //formulario para editar, a traves del id le paso los datos del producto a editar
+        return view('admin.products.edit')->with(compact('product', 'categories'));   //formulario para editar, a traves del id le paso los datos del producto a editar
     }
 
     public function update(Request $request, $id)
@@ -87,6 +91,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = $request->category_id; 
         $product->save(); //se encarga de hacer un UPDATE en la tabla
 
         return redirect('admin/products');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('body-class','product-page')
 
@@ -11,48 +11,39 @@
             <div class="container">
             
                 <div class="section text-center">
-                    <h2 class="title">Listado de productos</h2>
+                    <h2 class="title">Listado de categorías</h2>
 
                     <div class="team">
                         <div class="row">
-                            <a href="{{ url('/admin/products/create') }}"  class="btn btn-primary btn-round">Nuevo producto</a>
+                            <a href="{{ url('/admin/categories/create') }}"  class="btn btn-primary btn-round">Nueva categoría</a>
 
                             <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
+                                            <th class="text-center">Orden</th>
                                             <th class="col-md-2 text-center">Nombre</th>
                                             <th class="col-md-5 text-center">Descripción</th>
-                                            <th class="text-center">Categoría</th>
-                                            <th class="text-center">Precio</th>
                                             <th class="text-center">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($categories as $key => $category)
                                         <tr>
-                                            <td class="text-center">{{ $product->id }}</td>
-                                            <td class="text-center">{{ $product->name }}</td>
-                                            <td class="text-center">{{ $product->description }}</td>
-                                            <!--<td class="text-center">{{ $product->category ? $product->category->name : 'General' }}</td>-->
-                                            <td class="text-center">{{ $product->category_name }}</td>
-                                            <td class="text-center">&#36; {{ $product->price }}</td>
+                                            <td class="text-center">{{ ($key+1) }}</td>
+                                            <td class="text-center">{{ $category->name }}</td>
+                                            <td class="text-center">{{ $category->description }}</td>
                                             <td class="td-actions text-center">
                                                 
-                                                <form method="post" action="{{ url('/admin/products/'.$product->id) }}">
+                                                <form method="post" action="{{ url('/admin/categories/'.$category->id) }}">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
 
-                                                    <a href="{{ url('/products/'.$product->id) }}" rel="tooltip" title="Ver producto" class="btn btn-info btn-simple btn-xs" target="_blank">
+                                                    <a type="button" rel="tooltip" title="Ver categoría" class="btn btn-info btn-simple btn-xs">
                                                        <i class="fa fa-info"></i>
                                                     </a>
 
-                                                    <a href="{{ url('/admin/products/'.$product->id.'/edit') }}" rel="tooltip" title="Editar producto" class="btn btn-success btn-simple btn-xs">
+                                                    <a href="{{ url('/admin/categories/'.$category->id.'/edit') }}" rel="tooltip" title="Editar categoría" class="btn btn-success btn-simple btn-xs">
                                                         <i class="fa fa-edit"></i>
-                                                    </a>
-
-                                                    <a href="{{ url('/admin/products/'.$product->id.'/images') }}" type="button" rel="tooltip" title="Imagenes del producto" class="btn btn-warning btn-simple btn-xs">
-                                                       <i class="fa fa-image"></i>
                                                     </a>
 
                                                     <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
@@ -65,7 +56,7 @@
                                      @endforeach 
                                     </tbody>
                             </table>
-                            {{ $products->links() }}
+                            {{ $categories->links() }}
                         </div>
                     </div>
 

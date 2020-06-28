@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}">Caballo de Troya</a>
+                <a class="navbar-brand" href="{{ url('/') }}"><b>CABALLO DE TROYA</b></a>
             </div>
 
             <div class="collapse navbar-collapse" id="navigation-example">
@@ -60,9 +60,13 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/home') }}">Mis Prodcutos</a>
+                                        <a href="{{ url('/home') }}">Mis Movimientos</a>
                                     </li>
                                     @if (auth()->user()->admin)
+                                         <li>
+                                            <a href="{{ url('/admin/categories') }}">Gestionar categorías</a>
+                                        </li>
+
                                         <li>
                                             <a href="{{ url('/admin/products') }}">Gestionar productos</a>
                                         </li>
@@ -120,6 +124,7 @@
 
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
     <script src="{{ asset('js/material-kit.js') }}" type="text/javascript"></script>
+    @yield('scripts')
 
 </html>
 
