@@ -23,6 +23,7 @@
                                             <th class="text-center">Orden</th>
                                             <th class="col-md-2 text-center">Nombre</th>
                                             <th class="col-md-5 text-center">Descripción</th>
+                                            <th class="col-md-2 text-center">Imagen</th>
                                             <th class="text-center">Opciones</th>
                                         </tr>
                                     </thead>
@@ -32,6 +33,9 @@
                                             <td class="text-center">{{ ($key+1) }}</td>
                                             <td class="text-center">{{ $category->name }}</td>
                                             <td class="text-center">{{ $category->description }}</td>
+                                            <td class="text-center">
+                                                <img src="{{ $category->featured_image_url }}" height="50">
+                                            </td>
                                             <td class="td-actions text-center">
                                                 
                                                 <form method="post" action="{{ url('/admin/categories/'.$category->id) }}">
@@ -46,9 +50,9 @@
                                                         <i class="fa fa-edit"></i>
                                                     </a>
 
-                                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
+                                                    <a onclick="return confirm('¿Seguro dara de baja la categoría?')"><button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
                                                         <i class="fa fa-times"></i>
-                                                    </button>    
+                                                    </button> </a>   
                                                 </form>
                                                 
                                             </td>

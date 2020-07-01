@@ -55,9 +55,9 @@
                                                        <i class="fa fa-image"></i>
                                                     </a>
 
-                                                    <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
+                                                    <a onclick="return confirm('¿Seguro dará de baja el producto?')"><button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
                                                         <i class="fa fa-times"></i>
-                                                    </button>    
+                                                    </button></a>    
                                                 </form>
                                                 
                                             </td>
